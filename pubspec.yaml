@@ -1,7 +1,7 @@
-name: pindot
+name: pin_dot
 description: A Pin Dot Flutter package. Make it easy to use and minimal code.
 version: 1.0.0
-homepage: https://github.com/prongbang/pindot
+homepage: https://github.com/prongbang/pin_dot
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

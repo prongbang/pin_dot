@@ -1,4 +1,4 @@
-# pindot
+# pin_dot
 
 A Pin Dot Flutter package. Make it easy to use and minimal code.
 
