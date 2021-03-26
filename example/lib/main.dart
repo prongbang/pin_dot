@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pindot/pin_dot.dart';
+import 'package:pin_dot/pin_dot.dart';
 
 void main() {
   runApp(MyApp());

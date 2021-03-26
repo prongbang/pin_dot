@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  pindot:
+  pin_dot:
     path: ../
 
   # The following adds the Cupertino Icons font to your application.
