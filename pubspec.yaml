@@ -1,10 +1,10 @@
 name: pin_dot
 description: A Pin Dot Flutter package. Make it easy to use and minimal code.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/prongbang/pin_dot
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:

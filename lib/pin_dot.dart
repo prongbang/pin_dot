@@ -5,16 +5,16 @@ class PinDot extends StatefulWidget {
   final int length;
   final double padding;
   final Color activeColor;
-  final Color inactiveColor;
+  final Color? inactiveColor;
   final Color borderColor;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   const PinDot({
-    Key key,
-    @required this.size,
-    @required this.length,
-    @required this.activeColor,
-    @required this.borderColor,
+    Key? key,
+    required this.size,
+    required this.length,
+    required this.activeColor,
+    required this.borderColor,
     this.inactiveColor,
     this.padding = 16,
     this.controller,
