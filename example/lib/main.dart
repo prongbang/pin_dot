@@ -16,7 +16,20 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final TextEditingController _pinController = TextEditingController();
+
+  @override
+  void initState() {
+    _pinController.text = '12';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +38,7 @@ class HomePage extends StatelessWidget {
         child: PinDot(
           size: 13,
           length: 4,
-          text: '12',
+          controller: _pinController,
           activeColor: Colors.blue[700],
           borderColor: Colors.yellow[700],
         ),

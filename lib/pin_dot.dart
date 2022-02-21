@@ -4,10 +4,10 @@ class PinDot extends StatefulWidget {
   final double size;
   final int length;
   final double padding;
-  final String text;
   final Color activeColor;
   final Color inactiveColor;
   final Color borderColor;
+  final TextEditingController controller;
 
   const PinDot({
     Key key,
@@ -17,7 +17,7 @@ class PinDot extends StatefulWidget {
     @required this.borderColor,
     this.inactiveColor,
     this.padding = 16,
-    this.text = '',
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -25,6 +25,24 @@ class PinDot extends StatefulWidget {
 }
 
 class _PinDotState extends State<PinDot> {
+  String _text = '';
+
+  @override
+  void initState() {
+    widget.controller?.addListener(() {
+      setState(() {
+        _text = widget.controller?.text ?? '';
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.controller?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,9 +63,12 @@ class _PinDotState extends State<PinDot> {
       var active = widget.inactiveColor != null
           ? widget.inactiveColor
           : Colors.transparent;
-      if (widget.text.length > i) {
+      if (_text.length > i) {
         border = activeColor;
         active = activeColor;
+      } else {
+        border = borderColor;
+        active = widget.inactiveColor;
       }
       pinDots.add(Padding(
         padding: EdgeInsets.all(widget.padding),
