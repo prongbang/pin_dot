@@ -1,3 +1,7 @@
+## [1.0.4]
+
+* Improve UI
+
 ## [1.0.3] - Pin Dot widget
 
 * Migrate to null safety

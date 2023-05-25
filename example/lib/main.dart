@@ -22,11 +22,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final int _length = 4;
   final TextEditingController _pinController = TextEditingController();
 
   @override
   void initState() {
-    _pinController.text = '12';
+    _pinController.text = '';
     super.initState();
   }
 
@@ -35,12 +36,40 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(title: Text('PIN DOT')),
       body: Center(
-        child: PinDot(
-          size: 13,
-          length: 4,
-          controller: _pinController,
-          activeColor: Colors.blue[700],
-          borderColor: Colors.yellow[700],
+        child: Column(
+          children: [
+            SizedBox(height: 100),
+            PinDot(
+              size: 16,
+              length: _length,
+              controller: _pinController,
+              activeColor: Colors.blue.shade700,
+              borderColor: Colors.yellow.shade700,
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    if (_pinController.text.length < _length) {
+                      _pinController.text += '1';
+                    }
+                  },
+                  child: Text('ADD'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    if (_pinController.text.length > 0) {
+                      final x = _pinController.text;
+                      _pinController.text = x.substring(0, x.length - 1);
+                    }
+                  },
+                  child: Text('DEL'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

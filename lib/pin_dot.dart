@@ -46,48 +46,83 @@ class _PinDotState extends State<PinDot> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: _buildPinDot(),
+      height: widget.size + (widget.padding * 2),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: widget.length,
+        itemBuilder: (context, index) {
+          return _PinDotItemWidget(
+            index: index,
+            size: widget.size,
+            length: widget.length,
+            padding: widget.padding,
+            activeColor: widget.activeColor,
+            inactiveColor: widget.inactiveColor,
+            borderColor: widget.borderColor,
+            text: _text,
+          );
+        },
       ),
     );
   }
+}
 
-  List<Widget> _buildPinDot() {
-    var activeColor = widget.activeColor;
-    var borderColor = widget.borderColor;
-    List<Widget> pinDots = [];
-    for (var i = 0; i < widget.length; i++) {
-      var border = borderColor;
-      var active = widget.inactiveColor != null
-          ? widget.inactiveColor
-          : Colors.transparent;
-      if (_text.length > i) {
-        border = activeColor;
-        active = activeColor;
-      } else {
-        border = borderColor;
-        active = widget.inactiveColor;
-      }
-      pinDots.add(Padding(
-        padding: EdgeInsets.all(widget.padding),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(widget.size),
-            border: Border.all(color: border),
-          ),
+class _PinDotItemWidget extends StatelessWidget {
+  final double size;
+  final int length;
+  final int index;
+  final double padding;
+  final Color activeColor;
+  final Color? inactiveColor;
+  final Color borderColor;
+  final String text;
+
+  const _PinDotItemWidget({
+    Key? key,
+    required this.size,
+    required this.index,
+    required this.length,
+    required this.padding,
+    required this.activeColor,
+    required this.borderColor,
+    required this.text,
+    this.inactiveColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var border = borderColor;
+    var active = inactiveColor != null ? inactiveColor : Colors.transparent;
+    if (text.length > index) {
+      border = activeColor;
+      active = activeColor;
+    } else {
+      border = borderColor;
+      active = inactiveColor;
+    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: padding),
           child: Container(
             decoration: BoxDecoration(
-              color: active,
-              borderRadius: BorderRadius.circular(widget.size),
+              borderRadius: BorderRadius.circular(size),
+              border: Border.all(color: border),
             ),
-            height: widget.size,
-            width: widget.size,
+            child: Container(
+              decoration: BoxDecoration(
+                color: active,
+                borderRadius: BorderRadius.circular(size),
+              ),
+              height: size,
+              width: size,
+            ),
           ),
         ),
-      ));
-    }
-    return pinDots;
+      ],
+    );
   }
 }
